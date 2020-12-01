@@ -3,9 +3,10 @@ package aoc.days;
 import aoc.Day;
 import aoc.utils.ReadTxtFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Day01 extends Day<Integer> {
+public class Day01 extends Day<Long> {
 
     public static void main(String[] args) {
         Day01 d = new Day01();
@@ -13,7 +14,7 @@ public class Day01 extends Day<Integer> {
         d.printResult();
     }
 
-    String data;
+    List<Integer> data;
 
     public void init(String ...args) {
         // init stuff
@@ -23,26 +24,41 @@ public class Day01 extends Day<Integer> {
         }
         try {
             List<String> allLines = ReadTxtFile.readFileAsStringList(args[0]);
-            data = allLines.get(0);
+            data = new ArrayList<>();
+            for(String line : allLines) {
+                data.add(Integer.parseInt(line));
+            }
         } catch (Exception ex) {
             println("Read file error ("+args[0]+") : "+ex.getMessage());
         }
     }
 
-    public Integer part1() {
-        try {
-            return Integer.parseInt(data);
-        } catch (Exception ex) {
-            return -1;
+    public Long part1() {
+        int val = 0;
+        for (int i=0; i<data.size(); i++) {
+            for(int j=i+1; j<data.size(); j++) {
+                val = data.get(i) + data.get(j);
+                if (val == 2020) {
+                    return ((long)data.get(i))*((long)data.get(j));
+                }
+            }
         }
+        return (long) -1;
     }
 
-    public Integer part2() {
-        try {
-            return Integer.parseInt(data)*2;
-        } catch (Exception ex) {
-            return -1;
+    public Long part2() {
+        int val = 0;
+        for (int i=0; i<data.size(); i++) {
+            for(int j=i+1; j<data.size(); j++) {
+                for(int k=j+1; k<data.size(); k++) {
+                    val = data.get(i) + data.get(j) + data.get(k);
+                    if (val == 2020) {
+                        return ((long)data.get(i))*((long)data.get(j))*((long)data.get(k));
+                    }
+                }
+            }
         }
+        return (long) -1;
     }
 
 }
