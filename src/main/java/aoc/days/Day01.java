@@ -3,7 +3,6 @@ package aoc.days;
 import aoc.Day;
 import aoc.utils.ReadTxtFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Day01 extends Day<Long> {
@@ -23,11 +22,7 @@ public class Day01 extends Day<Long> {
             return;
         }
         try {
-            List<String> allLines = ReadTxtFile.readFileAsStringList(args[0]);
-            data = new ArrayList<>();
-            for(String line : allLines) {
-                data.add(Integer.parseInt(line));
-            }
+            data = ReadTxtFile.readFileAsIntegerList(args[0]);
         } catch (Exception ex) {
             println("Read file error ("+args[0]+") : "+ex.getMessage());
         }

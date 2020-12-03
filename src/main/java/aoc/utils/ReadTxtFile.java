@@ -33,6 +33,18 @@ public class ReadTxtFile {
         return result;
     }
 
+    public static List<Integer> readFileAsIntegerList(String fileName) throws IOException {
+        List<Integer> result = new ArrayList<>();
+        InputStream is = ReadTxtFile.class.getResourceAsStream(fileName);
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        String line = br.readLine();
+        while (line != null) {
+            result.add(Integer.parseInt(line));
+            line = br.readLine();
+        }
+        return result;
+    }
+
     /**
      * Read one txt UTF8 file and return a char 2D array.
      * The first element represne the abscissa and the second the ordinate with 0,0 is the top left element.
