@@ -1,14 +1,14 @@
 package aoc.common;
 
 public enum Direction {
-    NORTH("U",  0, -1),
-    NORTH_EAST("UR",  1, -1),
-    EAST("R", 1, 0),
-    SOUTH_EAST("DR", 1, 1),
-    SOUTH("D",  0, 1),
-    SOUTH_WEST("DL",  -1, 1),
-    WEST("L",  -1, 0),
-    NORTH_WEST("UL",  -1, -1);
+    NORTH("N",  0, -1),
+    NORTH_EAST("NE",  1, -1),
+    EAST("E", 1, 0),
+    SOUTH_EAST("SE", 1, 1),
+    SOUTH("S",  0, 1),
+    SOUTH_WEST("SW",  -1, 1),
+    WEST("W",  -1, 0),
+    NORTH_WEST("NW",  -1, -1);
 
     String val;
     public int deltaX;
@@ -26,7 +26,7 @@ public enum Direction {
                 return op;
             }
         }
-        return NORTH;
+        return null;
     }
 
     public Direction opposite() {
@@ -40,7 +40,7 @@ public enum Direction {
             case SOUTH:
                 return NORTH;
         }
-        return NORTH;
+        throw new IllegalArgumentException("Bad angle for opposite");
     }
 
 }
