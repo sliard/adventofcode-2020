@@ -79,7 +79,43 @@ public class Day15 extends Day<Long> {
     }
 
     public Long part2() {
-        return (long)0;
-    }
+
+        Map<Integer, Integer> lastPosition1 = new HashMap<>();
+        Map<Integer, Integer> lastPosition2 = new HashMap<>();
+        int index = 1;
+        int lastValue = 0;
+        for(int e: allData) {
+            lastPosition1.put(e,index);
+            index++;
+            lastValue = e;
+        }
+
+        while (index <= 30000000) {
+
+            Integer lastValuePosition1 = lastPosition1.get(lastValue);
+            Integer lastValuePosition2 = lastPosition2.get(lastValue);
+            if(lastValuePosition1 == null && lastValuePosition2 == null) {
+                lastValue = 0;
+            } else if(lastValuePosition2 == null) {
+                lastValue = 0;
+            } else {
+                lastValue = lastValuePosition2 - lastValuePosition1;
+            }
+
+            lastValuePosition1 = lastPosition1.get(lastValue);
+            lastValuePosition2 = lastPosition2.get(lastValue);
+
+            if(lastValuePosition1 == null && lastValuePosition2 == null) {
+                lastPosition1.put(lastValue, index);
+            } else if(lastValuePosition2 == null) {
+                lastPosition2.put(lastValue, index);
+            } else {
+                lastPosition1.put(lastValue, lastValuePosition2);
+                lastPosition2.put(lastValue, index);
+            }
+            index++;
+        }
+
+        return (long)lastValue;    }
 
 }
