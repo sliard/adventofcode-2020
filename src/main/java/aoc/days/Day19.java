@@ -3,6 +3,7 @@ package aoc.days;
 import aoc.Day;
 import aoc.utils.ReadTxtFile;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,22 +76,17 @@ public class Day19 extends Day<Long> {
     }
 
     @Data
+    @EqualsAndHashCode(onlyExplicitlyIncluded = true)
     public class Rule {
+        @EqualsAndHashCode.Include
         public int index;
+        @EqualsAndHashCode.Include
         public String val;
 
         public List<Rule> right = new ArrayList<>();
         public List<Rule> left = new ArrayList<>();
 
         public Map<String, Boolean> alreadyTest = new HashMap<>();
-    }
-
-    @Data
-    public class RulePosition {
-        Rule parent;
-        Rule currentRule;
-        boolean left;
-        public int index;
     }
 
     public boolean checkRule(String word, Rule r) {
