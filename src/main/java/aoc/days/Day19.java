@@ -4,6 +4,7 @@ import aoc.Day;
 import aoc.utils.ReadTxtFile;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,11 +77,14 @@ public class Day19 extends Day<Long> {
     }
 
     @Data
+    @ToString(onlyExplicitlyIncluded = true)
     @EqualsAndHashCode(onlyExplicitlyIncluded = true)
     public class Rule {
         @EqualsAndHashCode.Include
+        @ToString.Include
         public int index;
         @EqualsAndHashCode.Include
+        @ToString.Include
         public String val;
 
         public List<Rule> right = new ArrayList<>();
